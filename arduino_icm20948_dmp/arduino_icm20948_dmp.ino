@@ -2,6 +2,10 @@
 
 #define ICM20948_CS_PIN 12
 
+static const uint8_t dmp3_image[] = {
+#include "icm20948_img.dmp3a.h"
+};
+
 void setup() {
   // put your setup code here, to run once:
   SPI.begin();
