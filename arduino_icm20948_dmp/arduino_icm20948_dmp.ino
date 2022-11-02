@@ -1,4 +1,4 @@
-#include <SPI.h>
+#include "icm20948.h"
 
 #define ICM20948_CS_PIN 12
 
