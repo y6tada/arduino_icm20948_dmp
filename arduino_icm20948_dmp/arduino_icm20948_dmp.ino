@@ -15,10 +15,12 @@ void setup() {
   Serial.print("exec icm20948_init_spi\t");
   Serial.println(icm20948_error);
 
+  uint8_t tmp_addr = 0x7F;
   uint8_t tmp_buf[] = {0, 0,};
   uint16_t tmp_len = 2;
-  icm20948_write_reg(tmp_buf, tmp_len);
-  icm20948_read_reg(tmp_buf, tmp_len);
+  icm20948_write_reg(tmp_addr, tmp_buf, tmp_len);
+  tmp_addr = 0x00;
+  icm20948_read_reg(tmp_addr, tmp_buf, tmp_len);
 }
 
 void loop() {

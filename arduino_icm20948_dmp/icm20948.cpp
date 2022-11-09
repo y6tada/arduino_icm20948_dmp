@@ -19,7 +19,7 @@ icm_state_t icm20948_init_spi(void)
     return icm_state_no_error;
 }
 
-icm_state_t icm20948_write_reg(uint8_t *buf_write, uint16_t len_buf_write)
+icm_state_t icm20948_write_reg(uint8_t addr, uint8_t *buf_write, uint16_t len_buf_write)
 {
     SPI.beginTransaction(icm20948_arduino_spi_setting);
     digitalWrite(ICM20948_CS_PIN, LOW);
@@ -32,11 +32,24 @@ icm_state_t icm20948_write_reg(uint8_t *buf_write, uint16_t len_buf_write)
     return icm_state_no_error;
 }
 
-icm_state_t icm20948_read_reg (uint8_t *buf_read, uint16_t len_buf_read)
+icm_state_t icm20948_read_reg (uint8_t addr, uint8_t *buf_read, uint16_t len_buf_read)
 {
     SPI.beginTransaction(icm20948_arduino_spi_setting);
     digitalWrite(ICM20948_CS_PIN, LOW);
-    Serial.println(SPI.transfer(0x00 | 0x80));
+    Serial.println(SPI.transfer(addr | 0x80));
+    while (1)
+    {
+        if (len_buf_read == 0)
+        {
+            break;
+        }
+        --len_buf_read;
+        *buf_read = SPI.transfer(0x00);
+        ++buf_read;
+    }
+    
+    
+    Serial.println(SPI.transfer(addr | 0x80));
     Serial.println(SPI.transfer(0x00));
     digitalWrite(ICM20948_CS_PIN, HIGH);
     SPI.endTransaction();
