@@ -16,9 +16,10 @@ void setup() {
   Serial.println("serial established");
 
   const uint8_t spi_ss_pin = 7;
-  uint8_t icm20948_error = icm20948_init_spi(spi_ss_pin);
-  Serial.print("exec icm20948_init_spi\t");
-  Serial.println(icm20948_error);
+  if (icm20948_init_spi(spi_ss_pin) == icm_state_ok)
+  {
+    Serial.print("exec icm20948_init_spi\t");
+  }
 
   // Select bank 0
   uint8_t write_addr = 0x7F;

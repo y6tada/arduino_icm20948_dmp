@@ -18,7 +18,7 @@ icm_state_t icm20948_init_spi(uint8_t _spi_cs_pin)
     pinMode(spi_cs_pin, OUTPUT);
     digitalWrite(spi_cs_pin, HIGH);
 
-    return icm_state_no_error;
+    return icm_state_ok;
 }
 
 icm_state_t icm20948_write_reg(uint8_t addr, uint8_t *buf_write, uint16_t len_buf_write)
@@ -39,7 +39,7 @@ icm_state_t icm20948_write_reg(uint8_t addr, uint8_t *buf_write, uint16_t len_bu
     digitalWrite(spi_cs_pin, HIGH);
     SPI.endTransaction();
 
-    return icm_state_no_error;
+    return icm_state_ok;
 }
 
 icm_state_t icm20948_read_reg (uint8_t addr, uint8_t *buf_read, uint16_t len_buf_read)
@@ -61,5 +61,5 @@ icm_state_t icm20948_read_reg (uint8_t addr, uint8_t *buf_read, uint16_t len_buf
     digitalWrite(spi_cs_pin, HIGH);
     SPI.endTransaction();
 
-    return icm_state_no_error;
+    return icm_state_ok;
 }

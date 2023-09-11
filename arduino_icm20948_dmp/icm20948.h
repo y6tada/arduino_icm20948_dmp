@@ -6,7 +6,7 @@
 
 typedef enum
 {
-    icm_state_no_error,
+    icm_state_ok,
     icm_state_error
 } icm_state_t;
 
